@@ -222,4 +222,4 @@ For support, email support@tradingai.com or join our Discord community.
 
 ---
 
-Built with ❤️ by the Trading Assistant AI Team
+Built  ❤️ by Fazeel ahmed
