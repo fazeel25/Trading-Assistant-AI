@@ -218,7 +218,7 @@ MIT License - see LICENSE file for details
 
 ## Support
 
-For support, email support@tradingai.com or join our Discord community.
+For support, email fazeelahmed662"gmail.com or join our Discord community.
 
 ---
 
