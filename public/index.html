@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free paper-trading workspace with technical signals, risk controls and a virtual crypto portfolio." />
+  <meta name="theme-color" content="#07110f" />
+  <title>SignalDesk — Paper Trading Assistant</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#top" aria-label="SignalDesk home"><span class="brand-mark">S</span><span>SignalDesk</span></a>
+      <nav aria-label="Dashboard sections">
+        <a class="active" href="#market">Market desk</a>
+        <a href="#portfolio">Paper portfolio</a>
+        <a href="#journal">Trade journal</a>
+        <a href="#risk">Risk lab</a>
+      </nav>
+      <div class="safety-card"><span>SIMULATION MODE</span><strong>No real funds connected</strong><p>Signals are educational, not financial advice.</p></div>
+    </aside>
+
+    <main id="top">
+      <header class="topbar">
+        <div><p class="eyebrow">AI-assisted market workspace</p><h1>Trade the plan, not the noise.</h1></div>
+        <div class="market-status"><i></i><span id="feed-status">Connecting to market feed</span></div>
+      </header>
+
+      <section class="ticker-strip" id="ticker-strip" aria-label="Market prices"></section>
+
+      <section class="dashboard-grid" id="market">
+        <article class="panel chart-panel">
+          <div class="panel-head">
+            <div><p class="eyebrow">Selected market</p><h2 id="asset-title">Bitcoin / USDT</h2></div>
+            <select id="symbol-select" aria-label="Select market">
+              <option value="BTCUSDT">BTC / USDT</option><option value="ETHUSDT">ETH / USDT</option>
+              <option value="BNBUSDT">BNB / USDT</option><option value="SOLUSDT">SOL / USDT</option>
+            </select>
+          </div>
+          <div class="price-row"><strong id="current-price">—</strong><span id="price-change">—</span></div>
+          <svg id="price-chart" viewBox="0 0 800 260" role="img" aria-label="Price trend chart"><defs><linearGradient id="area" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#4fffc1" stop-opacity=".35"/><stop offset="1" stop-color="#4fffc1" stop-opacity="0"/></linearGradient></defs><path id="chart-area" fill="url(#area)"/><path id="chart-line" fill="none" stroke="#4fffc1" stroke-width="4" stroke-linecap="round"/></svg>
+          <div class="chart-footer"><span>50 candles · 1 hour</span><button class="ghost" id="refresh-data">Refresh market data</button></div>
+        </article>
+
+        <article class="panel signal-panel">
+          <div class="panel-head"><div><p class="eyebrow">Rule-based assistant</p><h2>Signal brief</h2></div><span class="signal wait" id="signal-badge">WAIT</span></div>
+          <div class="confidence"><div><span>Confidence</span><strong id="confidence-value">—</strong></div><div class="meter"><i id="confidence-meter"></i></div></div>
+          <div class="indicator-grid"><div><span>RSI 14</span><strong id="rsi-value">—</strong></div><div><span>MA 20</span><strong id="ma20-value">—</strong></div><div><span>MA 50</span><strong id="ma50-value">—</strong></div><div><span>Volatility</span><strong id="volatility-value">—</strong></div></div>
+          <ul id="signal-reasons" class="reason-list"></ul>
+          <p class="disclaimer">This model follows transparent indicator rules. It cannot predict markets.</p>
+        </article>
+      </section>
+
+      <section class="dashboard-grid lower" id="portfolio">
+        <article class="panel portfolio-panel">
+          <div class="panel-head"><div><p class="eyebrow">Virtual account</p><h2>Paper portfolio</h2></div><button class="ghost danger" id="reset-account">Reset</button></div>
+          <div class="balance"><span>Total value</span><strong id="portfolio-value">$10,000.00</strong><small id="portfolio-pnl">Starting balance</small></div>
+          <div class="trade-form">
+            <label>Order value (USDT)<input id="trade-amount" type="number" min="10" step="10" value="250" /></label>
+            <button class="primary" id="paper-buy">Paper buy</button><button class="secondary" id="paper-sell">Paper sell</button>
+          </div>
+          <div class="holdings" id="holdings-list"></div>
+        </article>
+
+        <article class="panel risk-panel" id="risk">
+          <div class="panel-head"><div><p class="eyebrow">Capital protection</p><h2>Risk calculator</h2></div><span class="shield">2% RULE</span></div>
+          <label>Account balance<input id="risk-balance" type="number" value="10000" min="1" /></label>
+          <label>Risk per trade <output id="risk-output">2%</output><input id="risk-percent" type="range" min="0.5" max="5" step="0.5" value="2" /></label>
+          <label>Stop distance<input id="stop-percent" type="number" value="3" min="0.1" step="0.1" /></label>
+          <div class="risk-result"><span>Maximum position</span><strong id="position-size">$6,666.67</strong><small id="max-loss">Maximum planned loss: $200.00</small></div>
+        </article>
+      </section>
+
+      <section class="panel journal-panel" id="journal">
+        <div class="panel-head"><div><p class="eyebrow">Decision history</p><h2>Trade journal</h2></div><button class="ghost" id="export-journal">Export CSV</button></div>
+        <div class="table-wrap"><table><thead><tr><th>Time</th><th>Market</th><th>Side</th><th>Price</th><th>Value</th></tr></thead><tbody id="journal-body"></tbody></table></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
